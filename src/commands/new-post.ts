@@ -5,6 +5,12 @@ import path from 'path';
 import {hugo} from '../utils/command';
 import {getHugoWorkspaceFolder} from '../utils/workspace';
 
+const getOffsetDateString = (): string => {
+    const date = new Date();
+    date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+    return date.toISOString().slice(0, 10).replace(/-/g, '');
+};
+
 const newPost = async () => {
     const workspace = await getHugoWorkspaceFolder();
     if (!workspace) {
@@ -15,7 +21,7 @@ const newPost = async () => {
     vscode.commands.executeCommand('setContext', 'hugo-utils.inHugoWorkspace', true);
 
     // Prompt for the new post path
-    const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+    const date = getOffsetDateString();
     const section = vscode.workspace.getConfiguration('hugo-utils').get<string>('mainSectionName')!;
     const postName = await vscode.window.showInputBox({
         prompt: 'Path to the new post',
