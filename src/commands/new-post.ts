@@ -14,7 +14,12 @@ const newPost = async () => {
 
     // Prompt for the new post path
     const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-    const postName = await vscode.window.showInputBox({prompt: 'Path to the new post', value: `blog/${date}-title.md`, valueSelection: [14, 19]});
+    const section = vscode.workspace.getConfiguration('hugo-utils').get<string>('mainSectionName')!;
+    const postName = await vscode.window.showInputBox({
+        prompt: 'Path to the new post',
+        value: `${section}/${date}-title.md`,
+        valueSelection: [section.length + 10, section.length + 15],
+    });
     if (!postName) {
         return;
     }

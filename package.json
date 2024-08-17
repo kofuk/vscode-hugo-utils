@@ -24,6 +24,16 @@
         "category": "Hugo"
       }
     ],
+    "configuration": {
+      "title": "Hugo",
+      "properties": {
+        "hugo-utils.mainSectionName": {
+          "type": "string",
+          "default": "post",
+          "description": "Default section name for post name completion"
+        }
+      }
+    },
     "menus": {
       "editor/context": [
         {
