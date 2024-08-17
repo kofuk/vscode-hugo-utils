@@ -9,19 +9,23 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "hugo-utils.newPost",
         "title": "Create a New Post",
-        "category": "Hugo"
+        "category": "Hugo",
+        "enablement": "hugo-utils.inHugoWorkspace"
       },
       {
         "command": "hugo-utils.convertToBundle",
         "title": "Convert This Page to Bundle",
-        "category": "Hugo"
+        "category": "Hugo",
+        "enablement": "hugo-utils.inHugoWorkspace"
       }
     ],
     "configuration": {
@@ -37,7 +41,7 @@
     "menus": {
       "editor/context": [
         {
-          "when": "resourceLangId == markdown",
+          "when": "hugo-utils.inHugoWorkspace && resourceLangId == markdown",
           "command": "hugo-utils.convertToBundle",
           "group": "1_modification"
         }

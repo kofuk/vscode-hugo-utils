@@ -12,6 +12,8 @@ const newPost = async () => {
         return;
     }
 
+    vscode.commands.executeCommand('setContext', 'hugo-utils.inHugoWorkspace', true);
+
     // Prompt for the new post path
     const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
     const section = vscode.workspace.getConfiguration('hugo-utils').get<string>('mainSectionName')!;
