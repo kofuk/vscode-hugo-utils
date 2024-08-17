@@ -3,12 +3,12 @@ import * as vscode from 'vscode';
 import path from 'path';
 
 import {hugo} from '../utils/command';
-import {isHugoWorkspace} from '../utils/workspace';
+import {getHugoWorkspaceFolder} from '../utils/workspace';
 
 const newPost = async () => {
-    const workspace = vscode.workspace.workspaceFolders?.[0];
-    if (!workspace || !await isHugoWorkspace(workspace)) {
-        vscode.window.showErrorMessage('No Hugo workspace detected');
+    const workspace = await getHugoWorkspaceFolder();
+    if (!workspace) {
+        vscode.window.showErrorMessage('Current workspace is not Hugo workspace');
         return;
     }
 

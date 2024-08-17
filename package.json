@@ -15,10 +15,24 @@
     "commands": [
       {
         "command": "hugo-utils.newPost",
-        "title": "New Post",
+        "title": "Create a New Post",
+        "category": "Hugo"
+      },
+      {
+        "command": "hugo-utils.convertToBundle",
+        "title": "Convert This Page to Bundle",
         "category": "Hugo"
       }
-    ]
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "resourceLangId == markdown",
+          "command": "hugo-utils.convertToBundle",
+          "group": "1_modification"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
