@@ -26,6 +26,12 @@
         "title": "Convert This Page to Bundle",
         "category": "Hugo",
         "enablement": "hugo-utils.inHugoWorkspace"
+      },
+      {
+        "command": "hugo-utils.updateLastmod",
+        "title": "Update Last Modified Date Time",
+        "category": "Hugo",
+        "enablement": "hugo-utils.inHugoWorkspace"
       }
     ],
     "configuration": {
@@ -43,6 +49,11 @@
         {
           "when": "hugo-utils.inHugoWorkspace && resourceLangId == markdown",
           "command": "hugo-utils.convertToBundle",
+          "group": "1_modification"
+        },
+        {
+          "when": "hugo-utils.inHugoWorkspace && resourceLangId == markdown",
+          "command": "hugo-utils.updateLastmod",
           "group": "1_modification"
         }
       ]

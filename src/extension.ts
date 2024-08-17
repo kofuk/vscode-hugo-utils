@@ -1,7 +1,8 @@
 import * as vscode from 'vscode';
 
-import newPost from './commands/new-post';
 import convertToBundle from './commands/convert-to-bundle';
+import newPost from './commands/new-post';
+import updateLastmod from './commands/update-lastmod';
 import { getHugoWorkspaceFolder } from './utils/workspace';
 
 const initializeContext = async () => {
@@ -14,7 +15,8 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(
 		vscode.commands.registerCommand('hugo-utils.newPost', newPost),
-		vscode.commands.registerCommand('hugo-utils.convertToBundle', convertToBundle)
+		vscode.commands.registerCommand('hugo-utils.convertToBundle', convertToBundle),
+		vscode.commands.registerCommand('hugo-utils.updateLastmod', updateLastmod),
 	);
 };
 

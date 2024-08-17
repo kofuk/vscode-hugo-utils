@@ -2,15 +2,7 @@ import * as vscode from 'vscode';
 
 import path from 'path';
 
-import { getHugoWorkspaceFolder } from '../utils/workspace';
-
 const convertToBundle = async () => {
-    const workspace = await getHugoWorkspaceFolder();
-    if (!workspace) {
-        vscode.window.showErrorMessage('Current workspace is not Hugo workspace');
-        return;
-    }
-
     const oldUri = vscode.window.activeTextEditor?.document.uri;
     if (!oldUri) {
         vscode.window.showErrorMessage('Hugo post is not opened');
