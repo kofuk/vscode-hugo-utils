@@ -1,8 +1,10 @@
 {
   "name": "hugo-utils",
   "displayName": "Hugo Utilities",
-  "description": "",
-  "version": "0.0.1",
+  "description": "Fill in the gaps between VS Code's Markdown mode and Hugo",
+  "version": "0.1.0",
+  "license": "MIT",
+  "publisher": "kofuk",
   "engines": {
     "vscode": "^1.92.0"
   },
