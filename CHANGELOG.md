@@ -2,7 +2,7 @@
 
 All notable changes to the "hugo-utils" extension will be documented in this file.
 
-## [Unreleased]
+## [0.2.0] - 2024-08-18
 
 ### Added
 
