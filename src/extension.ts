@@ -4,6 +4,7 @@ import convertToBundle from './commands/convert-to-bundle';
 import newPost from './commands/new-post';
 import updateLastmod from './commands/update-lastmod';
 import {getHugoWorkspaceFolder} from './utils';
+import { ShortcodeCompletionProvider } from './language/shortcode-completion';
 
 const initializeContext = async () => {
 	const workspace = await getHugoWorkspaceFolder();
@@ -17,6 +18,7 @@ export async function activate(context: vscode.ExtensionContext) {
 		vscode.commands.registerCommand('hugo-utils.newPost', newPost),
 		vscode.commands.registerCommand('hugo-utils.convertToBundle', convertToBundle),
 		vscode.commands.registerCommand('hugo-utils.updateLastmod', updateLastmod),
+		vscode.languages.registerCompletionItemProvider('markdown', new ShortcodeCompletionProvider(), ' '),
 	);
 };
 
