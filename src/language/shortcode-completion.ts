@@ -81,8 +81,30 @@ export class ShortcodeCompletionProvider implements vscode.CompletionItemProvide
         }
     }
 
+    private isAfterShortcode(linePrefix: string): boolean {
+        return linePrefix.endsWith('>}} ');
+    }
+
+    private getPreviousShortcodeName(linePrefix: string): string|null {
+        const match = linePrefix.match(/{{< (\w+)/);
+        if (!match) {
+            return null;
+        }
+
+        return match[1];
+    }
+
     async provideCompletionItems(document: vscode.TextDocument, position: vscode.Position): Promise<vscode.CompletionItem[]> {
         const linePrefix = document.lineAt(position).text.substring(0, position.character);
+
+        if (this.isAfterShortcode(linePrefix)) {
+            const name = this.getPreviousShortcodeName(linePrefix);
+            if (name && !name.startsWith('/')) {
+                return [
+                    new vscode.CompletionItem(`{{< /${name} >}}`)
+                ];
+            }
+        }
 
         if (!this.isInShortcode(linePrefix)) {
             return [];
