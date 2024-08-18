@@ -54,6 +54,15 @@
         }
       }
     },
+    "grammars": [
+      {
+        "scopeName": "hugo.shortcode",
+        "path": "./syntaxes/hugo-shortcode.tmLanguage.json",
+        "injectTo": [
+          "text.html.markdown"
+        ]
+      }
+    ],
     "menus": {
       "editor/context": [
         {
