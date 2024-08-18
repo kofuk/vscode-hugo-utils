@@ -1,6 +1,9 @@
 import * as vscode from 'vscode';
 
+import path from 'path';
+
 import {EMBEDDED_SHORTCODES, Shortcode} from './shortcodes';
+import { getHugoWorkspaceFolder } from '../utils';
 
 type ShortcodeState = {
     shortcode: string;
@@ -44,7 +47,41 @@ export class ShortcodeCompletionProvider implements vscode.CompletionItemProvide
         }
     }
 
-    provideCompletionItems(document: vscode.TextDocument, position: vscode.Position): vscode.CompletionItem[] {
+    private async scanShortcode(uri: vscode.Uri): Promise<string[]> {
+        try {
+            const stat = await vscode.workspace.fs.stat(uri);
+            if (stat.type !== vscode.FileType.Directory) {
+                return [];
+            }
+        } catch (_) {
+            return [];
+        }
+
+        const entries = await vscode.workspace.fs.readDirectory(uri);
+        return entries.filter((entry) => entry[1] === vscode.FileType.File &&  path.extname(entry[0]) === '.html')
+        .map((entry) => path.basename(entry[0], '.html'));
+    }
+
+    private async refreshShortcodes(): Promise<void> {
+        const shortcodes = [];
+
+        const workspace = (await getHugoWorkspaceFolder())!;
+        const localShortcodeDir = workspace.uri.with({path: path.join(workspace.uri.path, 'layouts/shortcodes')});
+        shortcodes.push(...await this.scanShortcode(localShortcodeDir));
+
+        const themes = await vscode.workspace.fs.readDirectory(workspace.uri.with({path: path.join(workspace.uri.path, 'themes')}));
+        for (const [themeDir] of themes) {
+            const uri = vscode.Uri.parse(themeDir);
+            shortcodes.push(...await this.scanShortcode(uri.with({path: path.join(uri.path, 'layouts/shortcodes')})));
+        }
+
+        this.shortcodes = Object.assign({}, EMBEDDED_SHORTCODES);
+        for (const shortcode of shortcodes) {
+            this.shortcodes[shortcode] = {};
+        }
+    }
+
+    async provideCompletionItems(document: vscode.TextDocument, position: vscode.Position): Promise<vscode.CompletionItem[]> {
         const linePrefix = document.lineAt(position).text.substring(0, position.character);
 
         if (!this.isInShortcode(linePrefix)) {
@@ -52,6 +89,8 @@ export class ShortcodeCompletionProvider implements vscode.CompletionItemProvide
         }
 
         if (this.isBeginningOfShortcode(linePrefix)) {
+            await this.refreshShortcodes();
+
             return this.completeShortcodeName();
         }
 
@@ -59,8 +98,6 @@ export class ShortcodeCompletionProvider implements vscode.CompletionItemProvide
 
         const shortcode = this.shortcodes[name];
         const existingArgs = this.parseArgs(args);
-
-        console.log(existingArgs);
 
         if (shortcode.args) {
             if (shortcode.unnamedArgs) {
