@@ -2,7 +2,7 @@
 
 Fill in the gaps between VS Code's Markdown mode and Hugo.
 
-![Screenshot](,/assets/screenshot.png)
+![Screenshot](./assets/screenshot.png)
 
 ## Features
 
