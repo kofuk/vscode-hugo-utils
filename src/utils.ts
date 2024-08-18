@@ -1,5 +1,7 @@
 import * as vscode from 'vscode';
+
 import cp from 'child_process';
+import path from 'path';
 
 export const hugo = async (args: string[], cwd: string): Promise<void> => {
 	const channel = vscode.window.createOutputChannel('Hugo');
@@ -17,3 +19,22 @@ export const hugo = async (args: string[], cwd: string): Promise<void> => {
 		});
 	});
 };
+
+export const getHugoWorkspaceFolder = async (): Promise<vscode.WorkspaceFolder|null> => {
+    const workspace = vscode.workspace.workspaceFolders?.[0];
+    if (!workspace) {
+        return null;
+    }
+
+	const workspaceUri = workspace.uri;
+	for (const name of ['config.toml', 'hugo.toml']) {
+		const hugoConfigUri = workspaceUri.with({path: path.join(workspaceUri.path, name)});
+		try {
+			await vscode.workspace.fs.stat(hugoConfigUri);
+			return workspace;
+		} catch (error) {}
+	}
+
+    return null;
+};
+

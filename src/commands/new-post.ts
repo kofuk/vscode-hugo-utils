@@ -2,8 +2,7 @@ import * as vscode from 'vscode';
 
 import path from 'path';
 
-import {hugo} from '../utils/command';
-import {getHugoWorkspaceFolder} from '../utils/workspace';
+import {getHugoWorkspaceFolder, hugo} from '../utils';
 
 const getOffsetDateString = (): string => {
     const date = new Date();

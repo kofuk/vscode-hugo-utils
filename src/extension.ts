@@ -3,7 +3,7 @@ import * as vscode from 'vscode';
 import convertToBundle from './commands/convert-to-bundle';
 import newPost from './commands/new-post';
 import updateLastmod from './commands/update-lastmod';
-import { getHugoWorkspaceFolder } from './utils/workspace';
+import {getHugoWorkspaceFolder} from './utils';
 
 const initializeContext = async () => {
 	const workspace = await getHugoWorkspaceFolder();
