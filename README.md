@@ -2,6 +2,8 @@
 
 Fill in the gaps between VS Code's Markdown mode and Hugo.
 
+![Screenshot](,/assets/screenshot.png)
+
 ## Features
 
 - Create a new post (`hugo-utils.newPost`)
@@ -9,6 +11,8 @@ Fill in the gaps between VS Code's Markdown mode and Hugo.
     - Also available in context menu
 - Update lastmod property of an existing post (`hugo-utils.updateLastmod`)
     - Also available in context menu
+- Syntax highlighting for shortcodes
+- Shortcode completion
 
 ## Configurations
 
