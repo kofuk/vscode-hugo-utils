@@ -2,6 +2,12 @@
 
 All notable changes to the "hugo-utils" extension will be documented in this file.
 
+## [0.2.1] - 2024-08-19
+
+### Fixed
+
+- Fix wrong repositroy URL in `package.json`
+
 ## [0.2.0] - 2024-08-18
 
 ### Added
