@@ -3,8 +3,17 @@ import * as vscode from 'vscode';
 import cp from 'child_process';
 import path from 'path';
 
+let channel: vscode.OutputChannel|null = null;
+
+export const getOutputChannel = (): vscode.OutputChannel => {
+	if (!channel) {
+		channel = vscode.window.createOutputChannel('Hugo');
+	}
+	return channel;
+};
+
 export const hugo = async (args: string[], cwd: string): Promise<void> => {
-	const channel = vscode.window.createOutputChannel('Hugo');
+	const channel = getOutputChannel();
 
 	return new Promise((resolve, reject) => {
 		const process = cp.spawn('hugo', args, {cwd});
