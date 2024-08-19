@@ -8,6 +8,10 @@ All notable changes to the "hugo-utils" extension will be documented in this fil
 
 - Add configuration for date format in post name completion
 
+### Changed
+
+- Change the default value for main section name to `posts`
+
 ## [0.2.1] - 2024-08-19
 
 ### Fixed

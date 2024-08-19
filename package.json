@@ -50,7 +50,7 @@
       "properties": {
         "hugo-utils.mainSectionName": {
           "type": "string",
-          "default": "post",
+          "default": "posts",
           "description": "Default section name for post name completion"
         },
         "hugo-utils.dateFormat": {
