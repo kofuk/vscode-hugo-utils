@@ -4,7 +4,7 @@ import convertToBundle from './commands/convert-to-bundle';
 import newPost from './commands/new-post';
 import updateLastmod from './commands/update-lastmod';
 import {getHugoWorkspaceFolder} from './utils';
-import { ShortcodeCompletionProvider } from './language/shortcode-completion';
+import {ShortcodeCompletionProvider} from './languages/shortcode-completion';
 
 const initializeContext = async () => {
 	const workspace = await getHugoWorkspaceFolder();
