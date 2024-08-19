@@ -11,7 +11,7 @@
     "url": "https://github.com/kofuk/vscode-hugo-utils/issues"
   },
   "homepage": "https://github.com/kofuk/vscode-hugo-utils#readme",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "MIT",
   "publisher": "kofuk",
   "engines": {
