@@ -4,12 +4,13 @@
   "description": "Fill in the gaps between VS Code's Markdown mode and Hugo",
   "icon": "assets/icon.png",
   "repository": {
-    "url": "https://github.com/kofuk/hugo-utils"
+    "type": "git",
+    "url": "https://github.com/kofuk/vscode-hugo-utils"
   },
   "bugs": {
-    "url": "https://github.com/kofuk/hugo-utils/issues"
+    "url": "https://github.com/kofuk/vscode-hugo-utils/issues"
   },
-  "homepage": "https://github.com/kofuk/hugo-utils#readme",
+  "homepage": "https://github.com/kofuk/vscode-hugo-utils#readme",
   "version": "0.2.0",
   "license": "MIT",
   "publisher": "kofuk",
