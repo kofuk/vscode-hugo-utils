@@ -52,6 +52,15 @@
           "type": "string",
           "default": "post",
           "description": "Default section name for post name completion"
+        },
+        "hugo-utils.dateFormat": {
+          "type": "string",
+          "default": "yyyy-mm-dd",
+          "enum": [
+            "yyyy-mm-dd",
+            "yyyymmdd"
+          ],
+          "description": "Date format for post name completion"
         }
       }
     },

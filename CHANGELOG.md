@@ -2,6 +2,12 @@
 
 All notable changes to the "hugo-utils" extension will be documented in this file.
 
+## [Unreleased]
+
+### Added
+
+- Add configuration for date format in post name completion
+
 ## [0.2.1] - 2024-08-19
 
 ### Fixed
