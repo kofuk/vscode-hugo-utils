@@ -12,6 +12,10 @@ All notable changes to the "hugo-utils" extension will be documented in this fil
 
 - Change the default value for main section name to `posts`
 
+### Fixed
+
+- Wrong syntax highlighting
+
 ## [0.2.1] - 2024-08-19
 
 ### Fixed
