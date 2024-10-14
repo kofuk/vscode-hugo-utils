@@ -106,7 +106,7 @@
     "deploy-ovsx": "ovsx publish --pat \"${OVSX_TOKEN}\""
   },
   "devDependencies": {
-    "@types/mocha": "^10.0.8",
+    "@types/mocha": "^10.0.9",
     "@types/node": "22.x",
     "@types/vscode": "^1.94.0",
     "@typescript-eslint/eslint-plugin": "^8.8.0",
