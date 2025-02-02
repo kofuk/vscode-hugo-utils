@@ -4,6 +4,12 @@ All notable changes to the "hugo-utils" extension will be documented in this fil
 
 ## [Unreleased]
 
+## [0.3.3] - 2025-02-02
+
+### Changed
+
+- Bump VS Code engine version
+
 ## [0.3.2] - 2025-02-02
 
 ### Changed

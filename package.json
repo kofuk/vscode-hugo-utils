@@ -11,11 +11,11 @@
     "url": "https://github.com/kofuk/vscode-hugo-utils/issues"
   },
   "homepage": "https://github.com/kofuk/vscode-hugo-utils#readme",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "license": "MIT",
   "publisher": "kofuk",
   "engines": {
-    "vscode": "^1.95.0"
+    "vscode": "^1.96.0"
   },
   "categories": [
     "Programming Languages",
