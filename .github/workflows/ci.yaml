@@ -23,6 +23,14 @@ jobs:
       - name: Test
         run: |
           npm run pretest
+      - name: Check VS Code engine version
+        run: |
+          ok=$(jq '.engines.vscode == .devDependencies["@types/vscode"]' package.json)
+          if [  "${ok}" != 'true' ]; then
+            echo "Mismatch between VS Code engine version and @types/vscode version"
+            echo "Please update engine version in package.json"
+            exit 1
+          fi
 
   release:
     runs-on: ubuntu-latest
