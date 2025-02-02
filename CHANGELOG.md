@@ -4,6 +4,10 @@ All notable changes to the "hugo-utils" extension will be documented in this fil
 
 ## [Unreleased]
 
+### Changed
+
+- Update shortcodes
+
 ### Fixed
 
 - Fix `{{%  %}}`-style shortcodes not being recognized

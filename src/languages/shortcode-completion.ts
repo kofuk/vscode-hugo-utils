@@ -14,9 +14,22 @@ export class ShortcodeCompletionProvider implements vscode.CompletionItemProvide
     private shortcodes: Record<string, Shortcode> = EMBEDDED_SHORTCODES;
 
     private completeShortcodeName(): vscode.CompletionItem[] {
-        return Object.keys(this.shortcodes).map((shortcode) => {
-            const item = new vscode.CompletionItem(shortcode, vscode.CompletionItemKind.Function);
-            item.insertText = new vscode.SnippetString(`${shortcode} $1`);
+        return Object.keys(this.shortcodes).map((name) => {
+            const shortcode = this.shortcodes[name];
+            const item = new vscode.CompletionItem(name, vscode.CompletionItemKind.Function);
+            item.insertText = new vscode.SnippetString(`${name} $1`);
+            let doc = shortcode.doc?.concat('\n') ?? '';
+            if (shortcode.deprecated) {
+                item.tags = [vscode.CompletionItemTag.Deprecated];
+                doc += `- Deprecated in ${shortcode.deprecated}.\n`;
+            }
+            if (shortcode.removed) {
+                item.tags = [vscode.CompletionItemTag.Deprecated];
+                doc += `- Removed in ${shortcode.removed}.\n`;
+            }
+            if (doc.length > 0) {
+                item.documentation = new vscode.MarkdownString(doc);
+            }
             return item;
         });
     }
