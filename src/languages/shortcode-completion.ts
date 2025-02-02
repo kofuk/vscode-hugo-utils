@@ -22,16 +22,16 @@ export class ShortcodeCompletionProvider implements vscode.CompletionItemProvide
     }
 
     private isBeginningOfShortcode(linePrefix: string): boolean {
-        return linePrefix.endsWith('{{< ');
+        return linePrefix.endsWith('{{< ') || linePrefix.endsWith('{{% ');
     }
 
     private isInShortcode(linePrefix: string): boolean {
-        return linePrefix.includes('{{< ') && !linePrefix.includes('}}');
+        return (linePrefix.includes('{{< ') || linePrefix.includes('{{% ')) && !linePrefix.includes('}}');
     }
 
     private getCurrentShortcodeState(linePrefix: string): ShortcodeState {
-        const shortcode = linePrefix.match(/{{< ([^\s]+)/)?.[1] || '';
-        const args = linePrefix.match(/{{< [^\s]+ (.*)/)?.[1] || '';
+        const shortcode = linePrefix.match(/{{[<%] ([^\s]+)/)?.[1] || '';
+        const args = linePrefix.match(/{{[<%] [^\s]+ (.*)/)?.[1] || '';
         return {shortcode, args};
     }
 
@@ -82,11 +82,11 @@ export class ShortcodeCompletionProvider implements vscode.CompletionItemProvide
     }
 
     private isAfterShortcode(linePrefix: string): boolean {
-        return linePrefix.endsWith('>}} ');
+        return linePrefix.endsWith('>}} ') || linePrefix.endsWith('%}} ');
     }
 
     private getPreviousShortcodeName(linePrefix: string): string|null {
-        const match = linePrefix.match(/{{< (\w+)/);
+        const match = linePrefix.match(/{{[<%] (\w+)/);
         if (!match) {
             return null;
         }
@@ -101,7 +101,8 @@ export class ShortcodeCompletionProvider implements vscode.CompletionItemProvide
             const name = this.getPreviousShortcodeName(linePrefix);
             if (name && !name.startsWith('/')) {
                 return [
-                    new vscode.CompletionItem(`{{< /${name} >}}`)
+                    new vscode.CompletionItem(`{{< /${name} >}}`),
+                    new vscode.CompletionItem(`{{% /${name} %}}`)
                 ];
             }
         }
@@ -126,6 +127,7 @@ export class ShortcodeCompletionProvider implements vscode.CompletionItemProvide
                 if (existingArgs.length === shortcode.args.length) {
                     return [
                         new vscode.CompletionItem('>}}', vscode.CompletionItemKind.Operator),
+                        new vscode.CompletionItem('%}}', vscode.CompletionItemKind.Operator)
                     ];
                 }
                 return [];
