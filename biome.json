@@ -1,0 +1,49 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.0.4/schema.json",
+	"vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
+	"files": { "ignoreUnknown": false },
+	"formatter": {
+		"enabled": true,
+		"formatWithErrors": false,
+		"indentStyle": "space",
+		"indentWidth": 2,
+		"lineEnding": "lf",
+		"lineWidth": 150,
+		"attributePosition": "auto",
+		"bracketSameLine": false,
+		"bracketSpacing": true,
+		"expand": "auto",
+		"useEditorconfig": true
+	},
+	"linter": { "enabled": true, "rules": { "recommended": false } },
+	"javascript": {
+		"formatter": {
+			"jsxQuoteStyle": "double",
+			"quoteProperties": "asNeeded",
+			"trailingCommas": "none",
+			"semicolons": "always",
+			"arrowParentheses": "always",
+			"bracketSameLine": false,
+			"quoteStyle": "single",
+			"attributePosition": "auto",
+			"bracketSpacing": false
+		},
+		"globals": []
+	},
+	"html": { "formatter": { "selfCloseVoidElements": "always" } },
+	"overrides": [
+		{
+			"includes": ["**/*.ts", "!out", "!dist", "!**/*.d.ts"],
+			"linter": {
+				"rules": {
+					"style": { "useBlockStatements": "warn" },
+					"suspicious": { "noDoubleEquals": "warn" }
+				}
+			}
+		}
+	],
+	"assist": {
+		"enabled": true,
+		"actions": { "source": { "organizeImports": "on" } }
+	}
+}
