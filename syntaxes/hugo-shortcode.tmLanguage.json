@@ -1,107 +1,107 @@
 {
-    "scopeName": "hugo.shortcode",
-    "injectionSelector": "L:meta.paragraph.markdown",
-    "patterns": [
-        {
-            "include": "#shortcode"
-        }
-    ],
-    "repository": {
-        "shortcode": {
-            "begin": "({{[<%](\\s*|\\s*/\\s*))(\\w+)",
-            "beginCaptures": {
-                "1": {
-                    "name": "punctuation.definition.shortcode.begin"
-                },
-                "3": {
-                    "name": "entity.name.tag.shortcode"
-                }
-            },
-            "end": "\\s*([>%]}})",
-            "endCaptures": {
-                "1": {
-                    "name": "punctuation.definition.shortcode.end"
-                }
-            },
-            "patterns": [
-                {
-                    "include": "#attribute"
-                }
-            ]
-        },
-        "attribute": {
-            "patterns": [
-                {
-                    "include": "#named_attr"
-                },
-                {
-                    "include": "#unnamed_attr"
-                }
-            ]
-        },
-        "named_attr": {
-            "patterns": [
-                {
-                    "match": "([^\\s=]+)(=)",
-                    "captures": {
-                        "1": {
-                            "name": "entity.other.attribute-name.shortcode"
-                        },
-                        "2": {
-                            "name": "punctuation.separator.key-value.shortcode"
-                        }
-                    }
-                },
-                {
-                    "include": "#quoted_string"
-                }
-            ]
-        },
-        "unnamed_attr": {
-            "patterns": [
-                {
-                    "include": "#unquoted_string"
-                },
-                {
-                    "include": "#quoted_string"
-                }
-            ]
-        },
-        "quoted_string": {
-            "patterns": [
-                {
-                    "match": "(\")([^\"]*)(\")",
-                    "captures": {
-                        "0": {
-                            "name": "string.quoted.double.shortcode"
-                        },
-                        "1": {
-                            "name": "punctuation.definition.string.begin.shortcode"
-                        },
-                        "3": {
-                            "name": "punctuation.definition.string.end.shortcode"
-                        }
-                    }
-                },
-                {
-                    "match": "(`)([^`]*)(`)",
-                    "captures": {
-                        "0": {
-                            "name": "string.quoted.raw.shortcode"
-                        },
-                        "1": {
-                            "name": "punctuation.definition.string.begin.shortcode"
-                        },
-                        "3": {
-                            "name": "punctuation.definition.string.end.shortcode"
-                        }
-                    }
-                }
-            ]
-        },
-        "unquoted_string": {
-            "match": "[^=\\s>}]+",
-            "name": "string.unquoted.shortcode"
-        }
+  "scopeName": "hugo.shortcode",
+  "injectionSelector": "L:meta.paragraph.markdown",
+  "patterns": [
+    {
+      "include": "#shortcode"
     }
+  ],
+  "repository": {
+    "shortcode": {
+      "begin": "({{[<%](\\s*|\\s*/\\s*))(\\w+)",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.shortcode.begin"
+        },
+        "3": {
+          "name": "entity.name.tag.shortcode"
+        }
+      },
+      "end": "\\s*([>%]}})",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.shortcode.end"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#attribute"
+        }
+      ]
+    },
+    "attribute": {
+      "patterns": [
+        {
+          "include": "#named_attr"
+        },
+        {
+          "include": "#unnamed_attr"
+        }
+      ]
+    },
+    "named_attr": {
+      "patterns": [
+        {
+          "match": "([^\\s=]+)(=)",
+          "captures": {
+            "1": {
+              "name": "entity.other.attribute-name.shortcode"
+            },
+            "2": {
+              "name": "punctuation.separator.key-value.shortcode"
+            }
+          }
+        },
+        {
+          "include": "#quoted_string"
+        }
+      ]
+    },
+    "unnamed_attr": {
+      "patterns": [
+        {
+          "include": "#unquoted_string"
+        },
+        {
+          "include": "#quoted_string"
+        }
+      ]
+    },
+    "quoted_string": {
+      "patterns": [
+        {
+          "match": "(\")([^\"]*)(\")",
+          "captures": {
+            "0": {
+              "name": "string.quoted.double.shortcode"
+            },
+            "1": {
+              "name": "punctuation.definition.string.begin.shortcode"
+            },
+            "3": {
+              "name": "punctuation.definition.string.end.shortcode"
+            }
+          }
+        },
+        {
+          "match": "(`)([^`]*)(`)",
+          "captures": {
+            "0": {
+              "name": "string.quoted.raw.shortcode"
+            },
+            "1": {
+              "name": "punctuation.definition.string.begin.shortcode"
+            },
+            "3": {
+              "name": "punctuation.definition.string.end.shortcode"
+            }
+          }
+        }
+      ]
+    },
+    "unquoted_string": {
+      "match": "[^=\\s>}]+",
+      "name": "string.unquoted.shortcode"
+    }
+  }
 }
