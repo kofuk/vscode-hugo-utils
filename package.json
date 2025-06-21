@@ -90,7 +90,7 @@
     "watch-tests": "tsc -p . -w --outDir out",
     "pretest": "npm run compile-tests && npm run compile && npm run lint",
     "check-types": "tsc --noEmit",
-    "lint": "biome check .",
+    "lint": "biome check src syntaxes .vscode *.json *.js",
     "test": "vscode-test",
     "deploy": "vsce publish",
     "deploy-ovsx": "ovsx publish --pat \"${OVSX_TOKEN}\""
