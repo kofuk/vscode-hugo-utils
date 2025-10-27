@@ -96,7 +96,7 @@
     "deploy-ovsx": "ovsx publish --pat \"${OVSX_TOKEN}\""
   },
   "devDependencies": {
-    "@biomejs/biome": "2.2.4",
+    "@biomejs/biome": "2.3.1",
     "@types/mocha": "^10.0.10",
     "@types/node": "24.x",
     "@types/vscode": "^1.104.0",
