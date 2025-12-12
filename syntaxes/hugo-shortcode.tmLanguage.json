@@ -8,10 +8,10 @@
   ],
   "repository": {
     "shortcode": {
-      "begin": "({{[<%](\\s*|\\s*/\\s*))(\\w+)",
+      "begin": "({{[<%](\\s*|\\s*/\\s*))([\\w-]+)",
       "beginCaptures": {
         "1": {
-          "name": "punctuation.definition.shortcode.begin"
+          "name": "punctuation.definition.tag.begin.shortcode"
         },
         "3": {
           "name": "entity.name.tag.shortcode"
@@ -20,7 +20,7 @@
       "end": "\\s*([>%]}})",
       "endCaptures": {
         "1": {
-          "name": "punctuation.definition.shortcode.end"
+          "name": "punctuation.definition.tag.end.shortcode"
         }
       },
       "patterns": [
