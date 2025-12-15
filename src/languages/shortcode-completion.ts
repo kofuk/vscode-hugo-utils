@@ -58,7 +58,7 @@ export class ShortcodeCompletionProvider implements vscode.CompletionItemProvide
     }
   }
 
-  private async scanShortcode(uri: vscode.Uri): Promise<string[]> {
+  private async scanShortcode(uri: vscode.Uri): Promise<{name: string; doc: string; args: string[]}[]> {
     try {
       const stat = await vscode.workspace.fs.stat(uri);
       if (stat.type !== vscode.FileType.Directory) {
@@ -69,9 +69,53 @@ export class ShortcodeCompletionProvider implements vscode.CompletionItemProvide
     }
 
     const entries = await vscode.workspace.fs.readDirectory(uri);
-    return entries
-      .filter((entry) => entry[1] === vscode.FileType.File && path.extname(entry[0]) === '.html')
-      .map((entry) => path.basename(entry[0], '.html'));
+
+    const result: {name: string; doc: string; args: string[]}[] = [];
+
+    for (const entry of entries) {
+      const [fileName, fileType] = entry;
+
+      if (fileType !== vscode.FileType.File || path.extname(fileName) !== '.html') {
+        continue;
+      }
+
+      const baseName = path.basename(fileName, '.html');
+      const fileUri = vscode.Uri.joinPath(uri, fileName);
+
+      let content = '';
+      try {
+        const fileData = await vscode.workspace.fs.readFile(fileUri);
+        content = Buffer.from(fileData).toString('utf8');
+      } catch {
+        continue;
+      }
+
+      const lines = content.split(/\r?\n/);
+
+      // ------- @description -------
+      let description = '';
+      const descriptionLine = lines.find((l) => l.trim().startsWith('@description'));
+      if (descriptionLine) {
+        description = descriptionLine.replace('@description', '').trim();
+      }
+
+      // ------- @param lines -------
+      const params: string[] = [];
+      for (const l of lines) {
+        const match = l.trim().match(/^@param\s+([A-Za-z0-9_\-]+)/);
+        if (match) {
+          params.push(match[1]);
+        }
+      }
+
+      result.push({
+        name: baseName,
+        doc: description,
+        args: params
+      });
+    }
+
+    return result;
   }
 
   private async refreshShortcodes(): Promise<void> {
@@ -89,7 +133,7 @@ export class ShortcodeCompletionProvider implements vscode.CompletionItemProvide
 
     this.shortcodes = Object.assign({}, EMBEDDED_SHORTCODES);
     for (const shortcode of shortcodes) {
-      this.shortcodes[shortcode] = {};
+      this.shortcodes[shortcode.name] = {doc: shortcode.doc, args: shortcode.args};
     }
   }
 
