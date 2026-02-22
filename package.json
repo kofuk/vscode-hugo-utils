@@ -15,7 +15,7 @@
   "license": "MIT",
   "publisher": "kofuk",
   "engines": {
-    "vscode": "^1.108.1"
+    "vscode": "^1.109.0"
   },
   "categories": ["Programming Languages", "Other"],
   "activationEvents": ["onStartupFinished"],
