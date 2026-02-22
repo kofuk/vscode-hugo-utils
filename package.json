@@ -15,7 +15,7 @@
   "license": "MIT",
   "publisher": "kofuk",
   "engines": {
-    "vscode": "^1.108.1"
+    "vscode": "^1.109.0"
   },
   "categories": ["Programming Languages", "Other"],
   "activationEvents": ["onStartupFinished"],
@@ -99,7 +99,7 @@
     "@biomejs/biome": "2.3.14",
     "@types/mocha": "^10.0.10",
     "@types/node": "25.x",
-    "@types/vscode": "^1.108.1",
+    "@types/vscode": "^1.109.0",
     "@vscode/test-cli": "^0.0.12",
     "@vscode/test-electron": "^2.5.2",
     "@vscode/vsce": "^3.7.1",
