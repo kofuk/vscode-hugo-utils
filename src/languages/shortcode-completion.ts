@@ -33,16 +33,19 @@ export class ShortcodeCompletionProvider implements vscode.CompletionItemProvide
   }
 
   private isBeginningOfShortcode(linePrefix: string): boolean {
-    return linePrefix.endsWith('{{< ') || linePrefix.endsWith('{{% ');
+    return linePrefix.endsWith('{{< ') || linePrefix.endsWith('{{% ') || linePrefix.endsWith('{{<') || linePrefix.endsWith('{{%');
   }
 
   private isInShortcode(linePrefix: string): boolean {
-    return (linePrefix.includes('{{< ') || linePrefix.includes('{{% ')) && !linePrefix.includes('}}');
+    return (
+      (linePrefix.includes('{{< ') || linePrefix.includes('{{% ') || linePrefix.includes('{{<') || linePrefix.includes('{{%')) &&
+      !linePrefix.includes('}}')
+    );
   }
 
   private getCurrentShortcodeState(linePrefix: string): ShortcodeState {
-    const shortcode = linePrefix.match(/{{[<%] ([^\s]+)/)?.[1] || '';
-    const args = linePrefix.match(/{{[<%] [^\s]+ (.*)/)?.[1] || '';
+    const shortcode = linePrefix.match(/{{[<%]\s*([^\s]+)/)?.[1] || '';
+    const args = linePrefix.match(/{{[<%]\s*[^\s]+\s*(.*)/)?.[1] || '';
     return {shortcode, args};
   }
 
@@ -98,7 +101,7 @@ export class ShortcodeCompletionProvider implements vscode.CompletionItemProvide
   }
 
   private getPreviousShortcodeName(linePrefix: string): string | null {
-    const match = linePrefix.match(/{{[<%] (\w+)/);
+    const match = linePrefix.match(/{{[<%]\s*([\w-]+)/);
     if (!match) {
       return null;
     }
